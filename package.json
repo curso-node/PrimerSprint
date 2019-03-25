@@ -1,0 +1,14 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "servidor express para el sprint1",
+  "main": "express.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Edwiinrtz edwiinrtz@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
