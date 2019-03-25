@@ -1,14 +1,120 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>server</title>
-	<link rel="stylesheet" type="text/css" href="css/estilo.css">
-	
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/generales.css" type="text/css" >
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Cursos Ofrecidos</title>
 </head>
-<body >
+<body>
 
-<e id="title" onclick="cambiarColor()">Bienvenido al server de nuestro primer SPRINT</e>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="./index.html">
+        <img src="" alt="logo Aplicación">
+      </a>
+    <ul class="nav navbar-nav ml-auto">
+      <li id="btn_ingresar" class="nav-item nav-link">
+        <a href="#">Ingresar</a>
+      </li>
+      <li id="btn_registrarse" class="nav-item nav-link">
+        <a href="./registrarse.html">Registrarse</a>
+      </li>
+    </ul>
+</nav>
 
-</body>
+<div class="container-fluid">
+
+  <div id="imgBanner">
+      <h2>Imagen destacada/Solo por apariencia</h2>
+  </div>
+
+ <div class="cointaner titulosSeccion">
+   <div class="row">
+     <div class="col-md-12">
+        <h2 class="text-center">Cursos que se ofrecen</h2>
+     </div>
+   </div>
+ </div>
+
+<section id="cursosAbiertos" class="container-fluid text-center">
+      <ul class="row">
+        <li class="col-md-3">
+         <div class="shadow p-3 mb-5 bg-white">
+            <figcaption>
+                <figure>
+                    <img src="./img/programas/IconoBase.png">
+                </figure>
+              </figcaption>
+              <div>
+                <h3>Titulo del curso</h3>
+                <p><span> Valor $</span></p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut posuere, dolor sagittis placerat 
+                    interdum, sem tortor mollis dui, et posuere tellus augue ac nibh. Etiam in suscipit nibh.
+                  </p>
+              </div>
+         </div>
+        </li>  
+        
+        <li class="col-md-3">
+            <div class="shadow p-3 mb-5 bg-white">
+               <figcaption>
+                   <figure>
+                       <img src="./img/programas/IconoBase.png">
+                   </figure>
+                 </figcaption>
+                 <div>
+                   <h3>Titulo del curso</h3>
+                   <p><span> Valor $</span></p>
+                   <p>
+                       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut posuere, dolor sagittis placerat 
+                       interdum, sem tortor mollis dui, et posuere tellus augue ac nibh. Etiam in suscipit nibh.
+                     </p>
+                 </div>
+            </div>
+           </li>  
+           <li class="col-md-3">
+              <div class="shadow p-3 mb-5 bg-white">
+                 <figcaption>
+                     <figure>
+                         <img src="./img/programas/IconoBase.png">
+                     </figure>
+                   </figcaption>
+                   <div>
+                     <h3>Titulo del curso</h3>
+                     <p><span> Valor $</span></p>
+                     <p>
+                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut posuere, dolor sagittis placerat 
+                         interdum, sem tortor mollis dui, et posuere tellus augue ac nibh. Etiam in suscipit nibh.
+                       </p>
+                   </div>
+              </div>
+             </li>  
+             <li class="col-md-3">
+                <div class="shadow p-3 mb-5 bg-white">
+                   <figcaption>
+                       <figure>
+                           <img src="./img/programas/IconoBase.png">
+                       </figure>
+                     </figcaption>
+                     <div>
+                       <h3>Titulo del curso</h3>
+                       <p><span> Valor $</span></p>
+                       <p>
+                           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut posuere, dolor sagittis placerat 
+                           interdum, sem tortor mollis dui, et posuere tellus augue ac nibh. Etiam in suscipit nibh.
+                         </p>
+                     </div>
+                </div>
+               </li>  
+      </ul>
+</section>
+
+</div>        
+
 <script type="text/javascript" src="/script/funciones.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
 </html>
