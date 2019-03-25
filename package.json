@@ -2,14 +2,16 @@
   "name": "server",
   "version": "1.0.0",
   "description": "servidor express para el sprint1",
-  "main": "express.js",
+  "main": "config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Edwiinrtz edwiinrtz@gmail.com",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.10"
   },
   "repository": {
     "type": "git",

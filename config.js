@@ -1,7 +1,14 @@
 const express = require('express');
 const app = express();
+const morgan = require('morgan');
+
+const PORT = 3000;
 
 app.use(express.static(__dirname + '/public'));
 
-app.listen(3000,
-	console.log("Ejecutandose en el puerto 3000 del localhost"))
+//Revisar que peticiones se realizan al servidor
+app.use(morgan('dev'));
+
+app.listen(PORT, function () {
+	console.log(`Servidor iniciado en el puerto ${PORT}`);
+});
