@@ -11,6 +11,7 @@ function crearRegistro (datosEstudiante) {
         identidad : datosEstudiante.dt,
         nombre : datosEstudiante.nombre,
         correo : datosEstudiante.correo,
+        contrasena : datosEstudiante.contrasena,
         telefono : datosEstudiante.tel,
         rol: 'aspirante',
     }
@@ -41,7 +42,6 @@ const guardar = () => {
 
     fs.writeFile('./dataBase/usuariosRegistrados.json', datos, (err) =>{
         if(err) throw err;
-
         console.log('Datos almacenados correctamente');
     })
 }

@@ -5,8 +5,8 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const hbs = require('hbs');
 const crud = require('./crud');
+const expressSession = require('express-session');
 
-////// Realizado por Andres
 //Archivos estaticos
 const directorioPublico = path.join(__dirname, '/public');
 app.use(express.static(directorioPublico));
@@ -16,8 +16,11 @@ const directorioPartials = path.join(__dirname, '/widgets');
 hbs.registerPartials(directorioPartials);
 
 //Permite leer el cuerpo en las respuestas del parametro (req -> peticion)
+//mildware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(expressSession({ secret: 'llave', saveUninitialized: false, resave: false}));
 
 //Revisar que peticiones se realizan al servidor
 app.use(morgan('dev'));
@@ -30,12 +33,43 @@ app.get('/registrarse', (req, res) =>{
 });
 
 app.post('/registrarse', (req, res) =>{
-	res.send('ok');
+	res.render("registrarse");
 	crud.crear(req.body);
 });
 
+app.get('/ingresar', (req, res) =>{
+	res.render('ingresar' , {success: req.session.succes});
+});
+
+app.post('/ingresar', (req, res) =>{		
+	let verificar = require('./validarAccesos');
+	let validarUsuario = verificar.existeUsuario(req.body);
+	if(validarUsuario){
+		req.session.succes = true;
+		res.redirect('dashboard');
+	} else{
+		req.session.succes = false;
+		res.render('ingresar');
+	}
+});
+
+app.get('/dashboard', (req,res) => {
+	if(req.session.succes){
+		res.render('dashboard');
+	} else{
+		res.redirect('ingresar');
+	}
+})
+
+app.get('/salir', ( req, res ) => {
+	if(req.session.succes){
+		req.session.succes = false;
+		res.redirect('ingresar');
+	}
+})
+
 app.get('/', (req, res) => {
-	res.render('index');
+	res.render('index', {success: req.session.succes});
 });
 
 // Rutas 404
@@ -49,5 +83,3 @@ const PORT = 3000;
 app.listen(PORT, function () {
 	console.log(`Servidor iniciado en el puerto ${PORT}`);
 });
-
-//// Termina Realizado por Andres
