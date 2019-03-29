@@ -4,29 +4,27 @@ const path = require('path');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const hbs = require('hbs');
-require('./helpers');
 const crud = require('./crud');
 const expressSession = require('express-session');
+require('./helpers');
 
-//Archivos estaticos
 const directorioPublico = path.join(__dirname, '/public');
 app.use(express.static(directorioPublico));
 
-//Registro de partials - widgets
+
 const directorioPartials = path.join(__dirname, '/widgets');
 hbs.registerPartials(directorioPartials);
 
 //Permite leer el cuerpo en las respuestas del parametro (req -> peticion)
-//mildware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(expressSession({ secret: 'llave', saveUninitialized: false, resave: false}));
 
-//Revisar que peticiones se realizan al servidor
+//peticiones servidor
 app.use(morgan('dev'));
 
-//hbs vistas
+//Inicializacion HBS
 app.set('view engine', 'hbs');
 
 app.get('/registrarse', (req, res) =>{
@@ -44,21 +42,28 @@ app.get('/ingresar', (req, res) =>{
 
 app.post('/ingresar', (req, res) =>{		
 	let verificar = require('./validarAccesos');
-
 	let validarUsuario = verificar.existeUsuario(req.body);
+
 	if(validarUsuario.usuarioExiste){
 		req.session.datosPersona = validarUsuario.datosUsuario;
 		req.session.succes = true;
-		res.redirect('dashboard');
+		if(validarUsuario.usuarioExiste){
+			req.session.datosPersona = validarUsuario.datosUsuario;
+			req.session.succes = true;
+			res.redirect('dashboard');
+		} 
 	} else{
-		req.session.succes = false;
-		res.render('ingresar');
+			req.session.succes = false;
+			res.render('ingresar');
 	}
 });
 
 app.get('/dashboard', (req,res) => {
 	if(req.session.succes){
-		res.render('dashboard', {'datos': req.session.datosPersona});
+		res.render('dashboard', {
+			success: req.session.succes, 
+			'datos': req.session.datosPersona,
+			});
 	} else{
 		res.redirect('ingresar');
 	}
@@ -73,7 +78,10 @@ app.get('/salir', ( req, res ) => {
 })
 
 app.get('/', (req, res) => {
-	res.render('index', {success: req.session.succes, 'datos': req.session.datosPersona});
+	res.render('index', {
+		success: req.session.succes, 
+		'datos': req.session.datosPersona,
+		});
 });
 
 // Rutas 404
