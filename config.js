@@ -4,6 +4,7 @@ const path = require('path');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const hbs = require('hbs');
+require('./helpers');
 const crud = require('./crud');
 const expressSession = require('express-session');
 
@@ -38,13 +39,15 @@ app.post('/registrarse', (req, res) =>{
 });
 
 app.get('/ingresar', (req, res) =>{
-	res.render('ingresar' , {success: req.session.succes});
+	res.render('ingresar' );
 });
 
 app.post('/ingresar', (req, res) =>{		
 	let verificar = require('./validarAccesos');
+
 	let validarUsuario = verificar.existeUsuario(req.body);
-	if(validarUsuario){
+	if(validarUsuario.usuarioExiste){
+		req.session.datosPersona = validarUsuario.datosUsuario;
 		req.session.succes = true;
 		res.redirect('dashboard');
 	} else{
@@ -55,7 +58,7 @@ app.post('/ingresar', (req, res) =>{
 
 app.get('/dashboard', (req,res) => {
 	if(req.session.succes){
-		res.render('dashboard');
+		res.render('dashboard', {'datos': req.session.datosPersona});
 	} else{
 		res.redirect('ingresar');
 	}
@@ -63,13 +66,14 @@ app.get('/dashboard', (req,res) => {
 
 app.get('/salir', ( req, res ) => {
 	if(req.session.succes){
+		req.session.datosPersona = undefined;
 		req.session.succes = false;
 		res.redirect('ingresar');
 	}
 })
 
 app.get('/', (req, res) => {
-	res.render('index', {success: req.session.succes});
+	res.render('index', {success: req.session.succes, 'datos': req.session.datosPersona});
 });
 
 // Rutas 404

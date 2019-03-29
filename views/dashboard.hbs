@@ -1,3 +1,14 @@
-{{>header }}
+{{>header}}
 
-<h2>Bienvenido a la aplicación </h2>
+<ul class="people_list">
+  {{#each datos}}
+  {{userCanSee}}
+     {{#if userCanSee}}
+    <li>{{this}}</li>
+    {{/if}}
+  {{/each}}
+</ul>
+
+<h2>Rol de la persona : {{datos.rol}}</h2>
+
+{{>footer}}
