@@ -1,0 +1,14 @@
+{{>header}}
+
+<ul class="people_list">
+  {{#each datos}}
+  {{userCanSee}}
+     {{#if userCanSee}}
+    <li>{{this}}</li>
+    {{/if}}
+  {{/each}}
+</ul>
+
+<h2>este es el dashboard de usuario}</h2>
+
+{{>footer}}

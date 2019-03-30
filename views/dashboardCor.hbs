@@ -1,0 +1,40 @@
+{{>header}}
+
+<ul class="people_list">
+  {{#each datos}}
+  {{userCanSee}}
+     {{#if userCanSee}}
+    <li>{{this}}</li>
+    {{/if}}
+  {{/each}}
+</ul>
+
+<script type="text/javascript">
+  function crearCurso(){
+    document.getElementById('float').style.display="inline-block";
+  }
+  function cerrar() {
+    document.getElementById('float').style.display="none";
+  }
+</script>
+
+
+<button onclick="crearCurso()" value="Crear curso" class="btn btn-success">Crear curso</button>
+
+<div id="float"> 
+  <button onclick="cerrar()" id="x" class="btn btn-danger">X</button>
+      <form action="/crearCurso" id="crearCurso" method="post">
+        <div class="form-group">
+          <input type="text"  class="form-control" name="nombre" id="NmC" placeholder="Nombre" required>
+          <input type="number" class="form-control" name="id" placeholder="ID" required>
+          <input type="text" class="form-control" name="costo" placeholder="Costo" required>
+          <textarea type="text" class="form-control" rows="5" cols="10" max="300"name="descr" placeholder="descripción" required></textarea>
+          <input type="text" class="form-control" name="duracion" placeholder="duración">
+          <input type="text" class="form-control" name="modalidad" placeholder="modalidad">
+          <input type="submit" id="btnS" class="btn btn-success" name="crear" value="Enviar">
+        </div>
+      </form>
+  
+</div>
+
+{{>footer}}
