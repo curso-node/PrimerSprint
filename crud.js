@@ -41,7 +41,7 @@ const listar = () => {
             correo : 'sebastian@gmail.com',
             contrasena : 'sebastian123',
             telefono : '123456',
-            rol: 'coordiandor',   
+            rol: 'coordinador',   
         }
         listado.push(datos);
     } 
