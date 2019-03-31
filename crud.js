@@ -4,7 +4,7 @@ const fs= require('fs');
 let listado = [];
 
 function crearRegistro (datosEstudiante) {
-    
+    let usuarioExiste = false;
     listar();
 
     let datos = {
@@ -16,9 +16,19 @@ function crearRegistro (datosEstudiante) {
         rol: 'aspirante',
     }
 
-    listado.push(datos);
-    console.log('Datos que se almacenan', listado);
-    guardar();
+    listado.forEach( (valor) => {
+        if(datos.identidad === valor.identidad){
+            usuarioExiste = true;
+            return usuarioExiste;
+        }
+    });
+
+    if(usuarioExiste){
+        console.log('usuario ya existe');
+    } else{
+        listado.push(datos);
+        guardar();
+    }    
 }
 
 const listar = () => {
@@ -29,6 +39,7 @@ const listar = () => {
             identidad : '123456789',
             nombre : 'Sebastian',
             correo : 'sebastian@gmail.com',
+            contrasena : 'sebastian123',
             telefono : '123456',
             rol: 'coordiandor',   
         }

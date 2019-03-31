@@ -19,7 +19,7 @@ hbs.registerPartials(directorioPartials);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(expressSession({ secret: 'llave', saveUninitialized: false, resave: false}));
+app.use(expressSession({ secret: 'llave', saveUninitialized: false, resave: true, cookie: { maxAge: 5000 }}));
 
 //peticiones servidor
 app.use(morgan('dev'));

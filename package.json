@@ -4,7 +4,8 @@
   "description": "servidor express para el sprint1",
   "main": "config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1", 
+    "start": "nodemon config.js"    
   },
   "author": "Edwiinrtz edwiinrtz@gmail.com",
   "license": "ISC",
