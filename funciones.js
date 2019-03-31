@@ -136,17 +136,15 @@ const eliminar=(datos)=>{
 	cursosDisp()
 	UsuDisp()
 	regg()
-	let dataUs = listaUsu.find(xf => xf.id == datos.u)
+	let dataUs = listaUsu.find(xf => xf.id == datos.u )
 	let dataCur = cursos.find(xfc => xfc.id == datos.c)
 	if (!dataUs || !dataCur) {
 		console.log("Uno de los datos es invalido. ¡verifique!")
 	}else{
-
-		let nEliminar = usuReg.filter(nn => nn.curso.id != datos.c && nn.usuarios.id != datos.u)
+		let nEliminar = usuReg.filter(xx=> xx.curso.id != datos.c ||  xx.usuarios.id != datos.u) //no sé por qué funciona con || y no con && pero así funciona
 		console.log(nEliminar)
-		// usuReg=nEliminar
-		// guardarReg() 
-
+		usuReg = nEliminar
+		guardarReg()
 	}
 }
 
