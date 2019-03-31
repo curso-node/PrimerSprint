@@ -73,6 +73,12 @@ const eliminar={
 		demand:true
 	}
 }
+verCursosusu={
+	usuario:{
+		alias:'u',
+		demand:true
+	}
+}
 
 const funciones = require('./funciones')
 
@@ -81,6 +87,7 @@ const argv = require("yargs").command("coordinador","coordinador del programa de
 							.command("cursos","listar todos los cursos o por usuario",cursos)
 							.command("actualizar","actualizar datos usuarios",actualizar)
 							.command("eliminar","eliminar <x> usuario de <y> curso",eliminar)
+							.command("miscursos","ver los cursos de cada usuario",verCursosusu)
 							.argv
 switch (argv._[0]){
 	case "coordinador":
@@ -104,5 +111,8 @@ switch (argv._[0]){
 	break;
 	case "eliminar":
 		funciones.eliminar(argv)
+	break
+	case "miscursos":
+		funciones.miscursos(argv.u)
 	break
 }

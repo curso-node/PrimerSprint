@@ -147,7 +147,13 @@ const eliminar=(datos)=>{
 		guardarReg()
 	}
 }
-
+const miscursos=(Mcur)=>{
+	regg()
+	let Mcursos = usuReg.filter(mc => mc.usuarios.id == Mcur)
+	for (var i = 0; i < Mcursos.length; i++) {
+		console.log(Mcursos[i].curso)
+	}
+}
 
 
 
@@ -157,6 +163,7 @@ module.exports={
 	regin,
 	cursosOP,
 	actualizar,
-	eliminar
+	eliminar,
+	miscursos
 
 }
