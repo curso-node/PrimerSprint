@@ -69,6 +69,32 @@ app.get('/dashboard', (req,res) => {
 	}
 })
 
+app.get('/dashboard/mis-cursos', (req,res) => {	
+	if(req.session.succes && req.session.datosPersona.rol === 'aspirante'){
+		res.render('mis-cursos', {
+		success: req.session.succes, 
+		'datos': req.session.datosPersona
+		})
+	} else{
+		// res.send('no tiene permiso');
+		res.redirect('../ingresar');
+	}
+});
+
+app.get('/dashboard/todos-los-cursos', (req, res ) => {
+	let listadoDeCursos = require('./dataBase/lista-de-cursos.json');
+	if(req.session.succes && req.session.datosPersona.rol === 'aspirante'){
+		res.render('todos-los-cursos',{
+			success: req.session.succes, 
+			'datos': req.session.datosPersona,
+			'listadoCursos' : listadoDeCursos
+			})
+	} else{
+		// res.send('no tiene permiso');
+		res.redirect('../ingresar');
+	}
+})
+
 app.get('/salir', ( req, res ) => {
 	if(req.session.succes){
 		req.session.datosPersona = undefined;
