@@ -44,12 +44,17 @@
                  <div>
                    <h3>Titulo del curso</h3>
                    <p><span> Valor $</span></p>
-                   <p>
-                       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut posuere, dolor sagittis placerat 
-                       interdum, sem tortor mollis dui, et posuere tellus augue ac nibh. Etiam in suscipit nibh.
-                     </p>
+
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="{{this.id}}">
+                      Mas información
+                    </button>
+                    
+
                  </div>
+
+                 
             </div>
+            
            </li>  
            <li class="col-md-3">
               <div class="shadow p-3 mb-5 bg-white">
@@ -88,8 +93,6 @@
       </ul>
 </section>
 
-</div>        
+</div>   
 
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-</body>
-</html>
+{{>footer}}
