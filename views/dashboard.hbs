@@ -1,0 +1,28 @@
+{{>header}}
+
+{{datos.rol}}
+{{datos.nombre}}
+{{#Rol datos.rol value="coordinador"}}
+	<e id="capa">	</e>
+	<div id="float"> 
+  		<button onclick="cerrar()" id="x" class="btn btn-danger">X</button>
+	    <form action="/crearCurso" id="crearCurso" method="post">
+	       	<div class="form-group">
+		    	<input type="text"  class="form-control" name="nombre" id="NmC" placeholder="Nombre" autocomplete="off" required>
+		        <input type="number" class="form-control" name="id" placeholder="ID" autocomplete="off" required>
+		        <input type="text" class="form-control" name="costo" placeholder="Costo" autocomplete="off" required>
+		        <textarea type="text" class="form-control" rows="5" cols="10" max="300"name="descr" autocomplete="off" placeholder="descripción" required></textarea>
+		        <input type="text" class="form-control" name="duraccion" autocomplete="off" placeholder="duracción">
+		        <input type="text" class="form-control" name="modalidad" autocomplete="off" placeholder="Modalidad">
+		        <input type="submit" id="btnS" class="btn btn-success" onclick="cerrar()" name="crear" value="Enviar">
+	        </div>
+	    </form>
+	</div>
+	
+{{else}}
+
+
+
+
+{{/Rol}}
+{{>footer}}
