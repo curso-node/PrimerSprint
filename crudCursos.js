@@ -120,18 +120,22 @@ const cursosOP=(opcion,lcurso)=>{
 }
 const actualizar=(datos)=>{
 	UsuDisp()
-	let usua = listaUsu.find(wh => wh.id == datos.u)
+	let usua = listaUsu.find(wh => wh.identidad == datos.id)
 	if (!usua) {
 		console.log("El usuario no existe")
 	}else{
-		usua[datos.o] = datos.n
+		usua['nombre'] = datos.nombre
+		usua['identidad'] = datos.identidad
+		usua['correo'] = datos.correo
+		usua['telefono'] = datos.telefono
+		usua['rol'] = datos.rol
 		guardarUsu()
 
 	}
 }
 const guardarUsu=()=>{
 	let txt = JSON.stringify(listaUsu)
-	fs.writeFile("usuarios.json",txt,(err)=> {
+	fs.writeFile("./dataBase/usuariosRegistrados.json",txt,(err)=> {
 		if(err){throw(err)}	else{console.log('Realizado con exito')}})
 }
 const eliminar=(usu,cur)=>{

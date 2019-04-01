@@ -156,8 +156,8 @@ app.post("/eliminar",(req,res)=>{
 	}
 })
 
-app.post("/convertir",(req,res)=>{
-	crudCursos.eliminar(req.body.iden,req.body.cur)
+app.post("/actualizar",(req,res)=>{
+	crudCursos.actualizar(req.body)
 	if(req.session.succes && req.session.datosPersona.rol === 'coordinador'){
 		res.render('dashboard',{
 				success: req.session.succes, 

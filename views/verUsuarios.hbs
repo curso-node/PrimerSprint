@@ -28,10 +28,10 @@
                                 </button>
                               </div>
                               <div class="modal-body">
-                                <b><p>Identidad: <span>{{this.identidad}}</span></p>
-                                <b><p>Correo: <span>{{this.correo}}</span></p>
-                                <b><p>Telefono : <span>{{this.telefono}}</span></p>
-                                <b><p>Rol : <span>{{this.rol}}</span></p>
+                                <b><p>Identidad: <span>{{this.identidad}}</span></p></b>
+                                <b><p>Correo: <span>{{this.correo}}</span></p></b>
+                                <b><p>Telefono : <span>{{this.telefono}}</span></p></b>
+                                <b><p>Rol : <span>{{this.rol}}</span></p></b>
                               </div>
                               <div class="modal-footer">
                               <td>                               
@@ -50,16 +50,39 @@
                                   <span aria-hidden="true">&times;</span>
                                 </button>
                               </div>
-                              <form>
-                              <div class="modal-body">
-                              	<label>Identidad</label>
-                                <input type="text" name="" value="{{this.identidad}}"></span></p>
-                                <p>correo: <span>{{this.correo}}</span></p>
-                                <p>telefono : <span>{{this.telefono}}</span></p>
-                                <p>Rol : <span>{{this.rol}}</span></p>
+                              <form action="/actualizar" method="post">
+                              <div class="modal-body .form-group">
+
+                              	<div class="form-group">
+                              	<b><label>Nombre</label></b>
+                                <input type="text" name="nombre" value="{{this.nombre}}">
+                                </div>
+                                <div class="form-group">
+                              	<b><label>Identidad</label></b>
+                                <input type="text" name="identidad" value="{{this.identidad}}">
+                                </div>
+                                <div class="form-group">
+                                <b><label>Correo</label></b>
+                                <input type="text" name="correo" value="{{this.correo}}">
+                                </div>
+                                <div class="form-group">
+                                <b><label>Telefono</label></b>
+                                <input type="text" name="telefono" value="{{this.telefono}}">
+                                </div>
+                                <div class="form-group">                                
+                                <b><label>Rol</label></b>
+                                	<select name="rol">
+										<option>coordinador</option>
+										<option>usuario</option>
+										<option>docente</option>
+									</select>
+                                </div>
                               </div>
                               <div class="modal-footer">
-                              <td>                            
+                              	<input type="hidden" name="id" value="{{this.identidad}}">
+                              	<input type="submit" name="actu" value="Actualizar" class="btn btn-success">
+                              <td>  
+                              </td>                          
                               </div>
                               </form>
                             </div>
