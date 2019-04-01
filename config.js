@@ -70,11 +70,37 @@ app.get('/dashboard', (req,res) => {
 	}
 })
 app.post("/crearCurso",(req, res)=>{
-	crudCursos.añadirCurso(req.body)
+	crudCursos.añadirCurso(req.body);
 	res.render('dashboard')
 
 })
-
+app.get('/dashboard/Cursos', (req, res ) => {
+	let listadoDeCursos = require('./dataBase/listacursos.json');
+	let registrados = require('./dataBase/registrados.json')
+	if(req.session.succes && req.session.datosPersona.rol === 'coordinador'){
+		res.render('Cursos',{
+			success: req.session.succes, 
+			'datos': req.session.datosPersona,
+			'listadoCursos': listadoDeCursos,
+			'registrados':registrados
+			})
+	} else{
+		// res.send('no tiene permiso');
+		res.redirect('../ingresar');
+	}
+})
+app.post('dashboard/cerrarCurso',(req,res)=>{
+	crudCursos.cursosOP("cerrar",req.body.idCur)
+	if(req.session.succes && req.session.datosPersona.rol === 'coordinador'){
+		res.render('cerrarCursos',{
+			success: req.session.succes, 
+			'datos': req.session.datosPersona,
+			})
+	} else{
+		res.redirect('../ingresar');
+	}
+}
+)
 app.get('/salir', ( req, res ) => {
 	if(req.session.succes){
 		req.session.datosPersona = undefined;

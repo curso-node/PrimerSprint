@@ -30,7 +30,7 @@ const añadirCurso=(data)=>{
 }
 const cursosDisp=()=>{
 	try{
-		cursos = require('./dataBase/listaCursos')
+		cursos = require('./dataBase/listacursos')
 	}catch{
 		cursos=[]
 	}
@@ -74,22 +74,20 @@ const regin=(datos)=>{ //registrar usuarios en cursos
 	}
 }
 const regg=()=>{ //llevar a usuReg los inscritos y sus cursos correspondientes
-	usuReg = require('./dataBase/registrados')
+	usuReg = require('registrados')
 }
 const guardarReg =()=>{ //crear el archivo de registrados
 	let texto = JSON.stringify(usuReg)
-	fs.writeFile("./dataBase/registrados.json",texto,(err)=> {
+	fs.writeFile("registrados.json",texto,(err)=> {
 		if(err){throw(err)}	else{console.log('Realizado con exito')}});
 }
 const UsuDisp=()=>{
 		listaUsu = require('./dataBase/usuariosRegistrados')
 }
-
-
 const cursosOP=(opcion,lcurso)=>{
 	cursosDisp()
 	UsuDisp()
-	regg()
+	// regg()
 	switch (opcion){
 		case "disponibles": //listar cursos disponibles
 			let Us = cursos.filter(ff=> ff.estado == "disponible")
@@ -163,6 +161,7 @@ module.exports={
 	cursosOP,
 	actualizar,
 	eliminar,
-	miscursos
+	miscursos,
+	// Tcursos
 
 }
