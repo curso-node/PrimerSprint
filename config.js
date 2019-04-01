@@ -48,6 +48,7 @@ app.post('/ingresar', (req, res) =>{
 	if(validarUsuario.usuarioExiste){
 		req.session.datosPersona = validarUsuario.datosUsuario;
 		req.session.succes = true;
+
 		if(validarUsuario.usuarioExiste){
 			req.session.datosPersona = validarUsuario.datosUsuario;
 			req.session.succes = true;
@@ -58,6 +59,7 @@ app.post('/ingresar', (req, res) =>{
 			res.render('ingresar');
 	}
 });
+
 
 app.get('/dashboard', (req,res) => {
 	if(req.session.succes){
@@ -76,31 +78,96 @@ app.post("/crearCurso",(req, res)=>{
 })
 app.get('/dashboard/Cursos', (req, res ) => {
 	let listadoDeCursos = require('./dataBase/listacursos.json');
-	let registrados = require('./dataBase/registrados.json')
+	// let registrados = require('./dataBase/registrados.json')
 	if(req.session.succes && req.session.datosPersona.rol === 'coordinador'){
 		res.render('Cursos',{
 			success: req.session.succes, 
 			'datos': req.session.datosPersona,
-			'listadoCursos': listadoDeCursos,
-			'registrados':registrados
+			'listadoCursos': listadoDeCursos
 			})
 	} else{
 		// res.send('no tiene permiso');
 		res.redirect('../ingresar');
 	}
 })
-app.post('dashboard/cerrarCurso',(req,res)=>{
-	crudCursos.cursosOP("cerrar",req.body.idCur)
+app.post('/dashboard/cerrarCurso',(req,res)=>{
+	crudCursos.cursosOP("cerrar",req.body.ID)
 	if(req.session.succes && req.session.datosPersona.rol === 'coordinador'){
-		res.render('cerrarCursos',{
+		res.render('Cursos',{
 			success: req.session.succes, 
 			'datos': req.session.datosPersona,
 			})
 	} else{
 		res.redirect('../ingresar');
 	}
-}
-)
+})
+app.post("/inscritos",(req,res)=>{
+	crudCursos.cursosOP("inscritos",req.body.idCur)
+	if(req.session.succes && req.session.datosPersona.rol === 'coordinador'){
+		res.render('inscritos',{
+			success: req.session.succes, 
+			'datos': req.session.datosPersona,
+			'listaInscritos':lista.lis,
+			'totalInscritos':lista.lon,
+			'Idcurso':lista.curso
+			})
+	} else{
+		// res.send('no tiene permiso');
+		res.redirect('../ingresar');
+	}
+			
+})
+app.post("/infoUsuarioCurso",(req,res)=>{
+	crudCursos.infoUsuCur(req.body.iden,req.body.cur)
+	if(req.session.succes && req.session.datosPersona.rol === 'coordinador'){
+		res.render('infoUsuarioCurso',{
+				success: req.session.succes, 
+				'datos': req.session.datosPersona,
+				'informacion':informacion
+		})
+	} else{
+		// res.send('no tiene permiso');
+		res.redirect('../ingresar');
+	}
+})
+app.get("/dashboard/verUsuarios",(req,res)=>{
+	let usuarios = require('./dataBase/usuariosRegistrados.json');
+	if(req.session.succes && req.session.datosPersona.rol === 'coordinador'){
+		res.render('verUsuarios',{
+				success: req.session.succes, 
+				'datos': req.session.datosPersona,
+				'lista':usuarios
+		})
+	} else{
+		// res.send('no tiene permiso');
+		res.redirect('../ingresar');
+	}
+})
+app.post("/eliminar",(req,res)=>{
+	crudCursos.eliminar(req.body.iden,req.body.cur)
+	if(req.session.succes && req.session.datosPersona.rol === 'coordinador'){
+		res.render('dashboard',{
+				success: req.session.succes, 
+				'datos': req.session.datosPersona
+		})
+	} else{
+		// res.send('no tiene permiso');
+		res.redirect('../ingresar');
+	}
+})
+
+app.post("/convertir",(req,res)=>{
+	crudCursos.eliminar(req.body.iden,req.body.cur)
+	if(req.session.succes && req.session.datosPersona.rol === 'coordinador'){
+		res.render('dashboard',{
+				success: req.session.succes, 
+				'datos': req.session.datosPersona
+		})
+	} else{
+		// res.send('no tiene permiso');
+		res.redirect('../ingresar');
+	}
+})
 app.get('/salir', ( req, res ) => {
 	if(req.session.succes){
 		req.session.datosPersona = undefined;

@@ -1,0 +1,72 @@
+{{>header}}
+<table class="table table-bordered">
+	<thead>
+    <tr>
+      <th scope="col">Usuario</th>
+      <th scope="col" colspan="3">Identidad</th>
+    </tr>
+  </thead>
+{{#each lista}}
+<tbody>
+    <tr>
+      <td>{{this.nombre}}</td>
+      <td>{{this.identidad}}</td>
+      <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target='#{{this.identidad}}'>Mas información</button></td>
+      <td>
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target='#modal2'>Actualizar datos</button> 
+      </td>
+    </tr>
+</tbody>
+<div class="modal fade" id='{{this.identidad}}' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel"><b>{{this.nombre}}</b></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <b><p>Identidad: <span>{{this.identidad}}</span></p>
+                                <b><p>Correo: <span>{{this.correo}}</span></p>
+                                <b><p>Telefono : <span>{{this.telefono}}</span></p>
+                                <b><p>Rol : <span>{{this.rol}}</span></p>
+                              </div>
+                              <div class="modal-footer">
+                              <td>                               
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+
+<div class="modal fade" id='modal2' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">{{this.nombre}}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <form>
+                              <div class="modal-body">
+                              	<label>Identidad</label>
+                                <input type="text" name="" value="{{this.identidad}}"></span></p>
+                                <p>correo: <span>{{this.correo}}</span></p>
+                                <p>telefono : <span>{{this.telefono}}</span></p>
+                                <p>Rol : <span>{{this.rol}}</span></p>
+                              </div>
+                              <div class="modal-footer">
+                              <td>                            
+                              </div>
+                              </form>
+                            </div>
+
+                          </div>
+                      </div>
+
+{{/each}}
+</table>
+{{>footer}}

@@ -74,11 +74,11 @@ const regin=(datos)=>{ //registrar usuarios en cursos
 	}
 }
 const regg=()=>{ //llevar a usuReg los inscritos y sus cursos correspondientes
-	usuReg = require('registrados')
+	usuReg = require('./dataBase/registrados')
 }
 const guardarReg =()=>{ //crear el archivo de registrados
 	let texto = JSON.stringify(usuReg)
-	fs.writeFile("registrados.json",texto,(err)=> {
+	fs.writeFile("./dataBase/registrados.json",texto,(err)=> {
 		if(err){throw(err)}	else{console.log('Realizado con exito')}});
 }
 const UsuDisp=()=>{
@@ -87,7 +87,7 @@ const UsuDisp=()=>{
 const cursosOP=(opcion,lcurso)=>{
 	cursosDisp()
 	UsuDisp()
-	// regg()
+	regg()
 	switch (opcion){
 		case "disponibles": //listar cursos disponibles
 			let Us = cursos.filter(ff=> ff.estado == "disponible")
@@ -96,14 +96,19 @@ const cursosOP=(opcion,lcurso)=>{
 			}
 		break
 		case "inscritos": //listar inscritos
-			let ls = usuReg.filter(tt => tt.curso['nombre'] == lcurso)
-			for (var i = 0; i < ls.length; i++) {
-				console.log(ls[i].usuarios)	
+			let ls = usuReg.filter(tt=>tt.curso['id']==lcurso)
+			lista={
+				lis:ls,
+				lon:ls.length,
+				curso:lcurso
 			}
-			console.log('Total inscritos:'+ls.length)
+			console.log(lista.lis)
+			console.log(lista.lon)
+			return ls
 		break
 		case "cerrar": //cerrar
-		let ab = cursos.find(abr => abr.nombre==lcurso)
+		console.log(lcurso)
+		let ab = cursos.find(ab => ab.id==lcurso)
 		if (!ab) {
 			console.log('Ese curso no existe')
 		}else{
@@ -129,16 +134,16 @@ const guardarUsu=()=>{
 	fs.writeFile("usuarios.json",txt,(err)=> {
 		if(err){throw(err)}	else{console.log('Realizado con exito')}})
 }
-const eliminar=(datos)=>{
+const eliminar=(usu,cur)=>{
 	cursosDisp()
 	UsuDisp()
 	regg()
-	let dataUs = listaUsu.find(xf => xf.id == datos.u )
-	let dataCur = cursos.find(xfc => xfc.id == datos.c)
+	let dataUs = listaUsu.find(xf => xf.identidad == usu )
+	let dataCur = cursos.find(xfc => xfc.id == cur)
 	if (!dataUs || !dataCur) {
 		console.log("Uno de los datos es invalido. ¡verifique!")
 	}else{
-		let nEliminar = usuReg.filter(xx=> xx.curso.id != datos.c ||  xx.usuarios.id != datos.u) //no sé por qué funciona con || y no con && pero así funciona
+		let nEliminar = usuReg.filter(xx=> xx.curso.id != cur ||  xx.usuarios.id != usu) //no sé por qué funciona con || y no con && pero así funciona
 		console.log(nEliminar)
 		usuReg = nEliminar
 		guardarReg()
@@ -149,6 +154,19 @@ const miscursos=(Mcur)=>{
 	let Mcursos = usuReg.filter(mc => mc.usuarios.id == Mcur)
 	for (var i = 0; i < Mcursos.length; i++) {
 		console.log(Mcursos[i].curso)
+	}
+}
+const infoUsuCur=(ID,cur)=>{
+	UsuDisp()
+	console.log(ID)
+	let infoUsuario = listaUsu.find(iu => iu.identidad == ID)
+	informacion={
+		nombre:infoUsuario.nombre,
+		identidad:infoUsuario.identidad,
+		correo:infoUsuario.correo,
+		telefono:infoUsuario.telefono,
+		rol:infoUsuario.rol,
+		curso:cur
 	}
 }
 
@@ -162,6 +180,6 @@ module.exports={
 	actualizar,
 	eliminar,
 	miscursos,
-	// Tcursos
+	infoUsuCur
 
 }

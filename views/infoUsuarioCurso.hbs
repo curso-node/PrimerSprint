@@ -1,0 +1,20 @@
+{{>header}}
+<div class="container">
+  	<h2>Información del usuario</h2>
+  <div class="card">
+    <div class="card-body">
+    	<p><b>Nombre:</b>	{{informacion.nombre}}</p>
+    	<p><b>Identidad:</b>	{{informacion.identidad}}</p>
+    	<p><b>correo:</b>	{{informacion.correo}}</p>
+    	<p><b>Telefono:</b>	{{informacion.telefono}}</p>
+    	<p><b>Rol:</b>	{{informacion.rol}}</p>
+    </div>
+  </div>
+  <form action="/eliminar" method="post">
+  	<input type="text" name="cur" value="{{informacion.curso}}">
+  	<input type="text" name="iden" value="{{informacion.identidad}}">
+  	<input type="submit" name="eli" value="Eliminar del curso" class="btn btn-danger">
+  </form>
+</div>
+
+{{>footer}}
