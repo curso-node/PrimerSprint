@@ -14,7 +14,7 @@ function crearRegistro (datosEstudiante) {
         contrasena : datosEstudiante.contrasena,
         telefono : datosEstudiante.tel,
         rol: 'aspirante',
-        cursosInscritos: []
+        cursosRegistrados: []
     }
 
     listado.forEach( (valor) => {
